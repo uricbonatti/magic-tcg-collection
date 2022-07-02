@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test:unit && npm version patch && npm run sonar
+yarn test:unit && yarn version --new-version patch && yarn sonar

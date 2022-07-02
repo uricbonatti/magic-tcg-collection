@@ -1,6 +1,6 @@
 {
   "name": "magic-tcg-collection",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "repository": "git@github.com:uricbonatti/magic-tcg-collection.git",
   "author": "Uric Bonatti <uricbonatti.eng@gmail.com>",

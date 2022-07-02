@@ -3,6 +3,13 @@
 
 npm run test:unit
 npm version patch
+PACKAGE_VERSION=$(cat package.json |
+  grep version |
+  head -1 |
+  awk -F: '{ print $2 }' |
+  sed 's/[",]//g')
+
+echo $PACKAGE_VERSION
 npm run sonar
 git add package.json
-git commit -m "Project Version {$PACKAGE_VERSION}"
+git commit --no-verify -m "$PACKAGE_VERSION"

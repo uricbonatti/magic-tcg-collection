@@ -6,7 +6,8 @@
   "author": "Uric Bonatti <uricbonatti.eng@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "yarn": "1.x"
   },
   "scripts": {
     "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./dist",

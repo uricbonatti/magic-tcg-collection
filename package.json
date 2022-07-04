@@ -5,6 +5,10 @@
   "repository": "git@github.com:uricbonatti/magic-tcg-collection.git",
   "author": "Uric Bonatti <uricbonatti.eng@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "16.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./dist",
     "start": "node dist/shared/app/server.js",
@@ -31,8 +35,10 @@
     "remove-accents": "^0.4.2",
     "replace-special-characters": "^1.2.5",
     "ts-deepmerge": "^2.0.1",
+    "tscpaths": "^0.0.9",
     "tsyringe": "^4.7.0",
     "typeorm": "^0.2.45",
+    "typescript": "^4.6.3",
     "uuid": "^8.3.2",
     "winston": "^3.7.2"
   },
@@ -68,8 +74,6 @@
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
-    "tsconfig-paths": "^3.14.1",
-    "tscpaths": "^0.0.9",
-    "typescript": "^4.6.3"
+    "tsconfig-paths": "^3.14.1"
   }
 }

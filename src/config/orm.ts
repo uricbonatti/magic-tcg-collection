@@ -4,13 +4,19 @@ import Card from '@modules/cards/schemas/Card';
 import { ConnectionOptions, createConnection } from 'typeorm';
 import env from './env';
 
+const mongoConfig = env.MONGO_URL
+  ? { url: env.MONGO_URL }
+  : {
+      port: env.MONGO_PORT,
+      host: env.MONGO_HOST,
+      username: env.MONGO_USERNAME,
+      password: env.MONGO_PASSWORD
+    };
+
 export const connectionOptions = {
   type: 'mongodb',
-  database: 'plugins',
-  port: env.MONGO_PORT,
-  host: env.MONGO_HOST,
-  username: env.MONGO_USERNAME,
-  password: env.MONGO_PASSWORD,
+  database: 'projetos',
+  ...mongoConfig,
   entities: [Player, Card],
   useUnifiedTopology: true,
   synchronize: true,

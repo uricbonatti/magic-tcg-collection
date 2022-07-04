@@ -6,6 +6,7 @@ import ensureAuthenticated from '@modules/auth/middlewares/ensureAuthenticated';
 import cardRoutes from '@modules/cards/routes/cardRoutes';
 
 const routes = Router();
+routes.use('/', authRoutes);
 routes.use('/healthcheck', healthcheck);
 routes.use('/', authRoutes);
 routes.use(ensureAuthenticated);

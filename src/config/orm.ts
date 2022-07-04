@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import Player from '@modules/auth/schemas/Player';
+import Card from '@modules/cards/schemas/Card';
 import { ConnectionOptions, createConnection } from 'typeorm';
 import env from './env';
 
@@ -10,7 +11,7 @@ export const connectionOptions = {
   host: env.MONGO_HOST,
   username: env.MONGO_USERNAME,
   password: env.MONGO_PASSWORD,
-  entities: [Player],
+  entities: [Player, Card],
   useUnifiedTopology: true,
   synchronize: true,
   w: 'majority',

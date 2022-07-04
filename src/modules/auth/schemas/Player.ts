@@ -9,7 +9,7 @@ import {
 
 import { Expose, Exclude } from 'class-transformer';
 
-@Entity('player')
+@Entity('players')
 class Player {
   @Exclude()
   @ObjectIdColumn()

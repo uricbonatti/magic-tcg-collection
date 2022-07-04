@@ -5,6 +5,8 @@ const env = {
   MONGO_HOST: process.env.MONGO_HOST || 'localhost',
   MONGO_USERNAME: process.env.MONGO_USERNAME,
   MONGO_PASSWORD: process.env.MONGO_PASSWORD,
-  APP_SECRET: process.env.APP_SECRET || 'default'
+  APP_SECRET: process.env.APP_SECRET || 'default',
+  GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
+  GOOGLE_TRANSLATE_API_KEY: process.env.GOOGLE_TRANSLATE_API_KEY
 };
 export default env;

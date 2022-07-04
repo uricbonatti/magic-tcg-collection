@@ -1,2 +1,2 @@
-build: npm run build
-web: npm start
+build: yarn build
+web: yarn start

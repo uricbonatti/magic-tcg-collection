@@ -7,7 +7,6 @@ RUN yarn install --production
 COPY tsconfig.json ./
 COPY tsconfig.build.json ./
 COPY src ./src
-RUN yarn global add @mapbox/node-pre-gyp
 RUN yarn add -D typescript tscpaths
 RUN yarn build
 ENV NODE_ENV production

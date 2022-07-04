@@ -1,0 +1,1587 @@
+{
+	"info": {
+		"_postman_id": "496cb5ae-f239-4589-907b-85ae56bbf6d9",
+		"name": "[Zappts] Magic TCG Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13703444"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Cadastro Bem Sucedida\",()=>{\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\",\r\n \"confirm_password\":\"{{playerPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/signup",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sign Up (Success)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\",\r\n \"confirm_password\":\"{{playerPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "104"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"68-ho2ui/8UzspCzFQIJukPHsUdwWA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 19:49:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"email\": \"uricbonatti@gmail.com\",\n    \"createdAt\": \"2022-07-03T19:49:12.125Z\",\n    \"id\": \"62c1f2b8ae3f595a205aab71\"\n}"
+				},
+				{
+					"name": "Sign Up (Email Used)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\",\r\n \"confirm_password\":\"{{playerPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "58"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3a-zbIJVs1VMB74J76QSBAJaQC+qjs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 19:49:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Email address already used.\"\n}"
+				},
+				{
+					"name": "Sign Up (Passwords not match)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\",\r\n \"confirm_password\":\"{{playerPassword}}1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "72"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"48-hiSR1EkPrG/p6QqoBifrCc5sKMo\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 19:50:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"'confirm_password' must be [ref:password]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Sign In",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()\r",
+							"pm.test(\"Autenticação Bem Sucedida\",()=>{\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"pm.collectionVariables.set(\"token\", response.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/signin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sign In (Success)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "298"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12a-ieY++NJPKX8i1zPX6dsiH2Mpp9Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 19:51:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"player\": {\n        \"email\": \"uricbonatti@gmail.com\",\n        \"createdAt\": \"2022-07-03T19:49:12.125Z\",\n        \"id\": \"62c1f2b8ae3f595a205aab71\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTY4Nzc4OTAsImV4cCI6MTY1Njk2NDI5MCwic3ViIjoiNjJjMWYyYjhhZTNmNTk1YTIwNWFhYjcxIn0.J1hswy324a6N2CGzXQjqwD57HDBVilJttt7DR1wfvzw\"\n}"
+				},
+				{
+					"name": "Sign In (Wrong Credentials)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "68"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"44-j6nZlXXQf+BpN3fF6aZuy7nodJo\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 19:51:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Incorrect email/password combination.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List Player Cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Obetenção das cartas Bem Sucedida\",()=>{\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cards/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cards",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List Player Cards (Empty)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cards/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:23:31 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				},
+				{
+					"name": "List Player Cards (Success)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cards/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "790"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"316-nz8iXnBUBnyNQWEurXqSHnPQX3M\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:26:03 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"foil\": true,\n        \"edition\": \"2st\",\n        \"playerId\": \"62c24e406d7628ec8364da95\",\n        \"language\": \"en\",\n        \"quantity\": 1,\n        \"priceInBrazilianReal\": 150.53,\n        \"name\": \"furia da tempestade\",\n        \"createdAt\": \"2022-07-04T20:25:47.337Z\",\n        \"updatedAt\": \"2022-07-04T20:25:47.337Z\",\n        \"id\": \"62c34ccbcf79552cacd9d3b7\"\n    },\n    {\n        \"foil\": false,\n        \"edition\": \"2st\",\n        \"playerId\": \"62c24e406d7628ec8364da95\",\n        \"language\": \"jp\",\n        \"quantity\": 3,\n        \"priceInBrazilianReal\": 12.53,\n        \"name\": \"testes de furia\",\n        \"createdAt\": \"2022-07-04T20:25:16.408Z\",\n        \"updatedAt\": \"2022-07-04T20:25:16.408Z\",\n        \"id\": \"62c34caccf79552cacd9d3b6\"\n    },\n    {\n        \"foil\": true,\n        \"edition\": \"1st\",\n        \"playerId\": \"62c24e406d7628ec8364da95\",\n        \"language\": \"en\",\n        \"quantity\": 1,\n        \"priceInBrazilianReal\": 1.025,\n        \"name\": \"testes de furia\",\n        \"createdAt\": \"2022-07-04T20:24:50.921Z\",\n        \"updatedAt\": \"2022-07-04T20:24:50.921Z\",\n        \"id\": \"62c34c92cf79552cacd9d3b5\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Show Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Obetenção das cartas Bem Sucedida\",()=>{\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cards/{{cardId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cards",
+						"{{cardId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Show Card(Not Found)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2d-0/DngVMh3I8l5ufZNBMeG+T3hSI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:23:57 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Card not found\"\n}"
+				},
+				{
+					"name": "Show Card(Success)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "261"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"105-ya+F5mbjFRA7gq/WM/uqGdQ7q6E\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:26:48 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"foil\": false,\n    \"edition\": \"2st\",\n    \"playerId\": \"62c24e406d7628ec8364da95\",\n    \"language\": \"jp\",\n    \"quantity\": 3,\n    \"priceInBrazilianReal\": 12.53,\n    \"name\": \"testes de furia\",\n    \"createdAt\": \"2022-07-04T20:25:16.408Z\",\n    \"updatedAt\": \"2022-07-04T20:25:16.408Z\",\n    \"id\": \"62c34caccf79552cacd9d3b6\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Search Cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Obetenção das cartas Bem Sucedida\",()=>{\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cards/search/tempestade",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cards",
+						"search",
+						"tempestade"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Search Cards (Empty)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cards/search/Fortitude",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"search",
+								"Fortitude"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:24:14 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				},
+				{
+					"name": "Search Cards (Success)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cards/search/tempestade",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"search",
+								"tempestade"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "267"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"10b-c3ohW/EmfuGRP0JcDaXTh2vTt3g\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:27:29 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"foil\": true,\n        \"edition\": \"2st\",\n        \"playerId\": \"62c24e406d7628ec8364da95\",\n        \"language\": \"en\",\n        \"quantity\": 1,\n        \"priceInBrazilianReal\": 150.53,\n        \"name\": \"furia da tempestade\",\n        \"createdAt\": \"2022-07-04T20:25:47.337Z\",\n        \"updatedAt\": \"2022-07-04T20:25:47.337Z\",\n        \"id\": \"62c34ccbcf79552cacd9d3b7\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Add Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Obetenção das cartas Bem Sucedida\",()=>{\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"name\": \"Storm Rage\",\r\n \"edition\": \"2st\",\r\n \"language\": \"en\",\r\n \"foil\":true,\r\n \"priceInBrazilianReal\": 150.53,\r\n \"quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cards/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cards",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Card (Languese not accept)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"name\": \"Teste\",\r\n \"edition\": \"1st\",\r\n \"language\": \"fr\",\r\n \"foil\":true,\r\n \"priceInBrazilianReal\": 1.00,\r\n \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-Wq0C4XAfVzOkok6BZrXps8IwuYI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 21:59:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"'language' must be one of [pt, jp, en]\"\n}"
+				},
+				{
+					"name": "Add Card (Success - In Portuguese)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"name\": \"Teste\",\r\n \"edition\": \"1st\",\r\n \"language\": \"pt\",\r\n \"foil\":true,\r\n \"priceInBrazilianReal\": 1.00,\r\n \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "246"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f6-v91nbhLGr7ibXSUs8X8dGsFF8SU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 21:59:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"foil\": true,\n    \"edition\": \"1st\",\n    \"playerId\": \"62c21068b5fb3a07a3cbb2bf\",\n    \"language\": \"pt\",\n    \"quantity\": 1,\n    \"priceInBrazilianReal\": 1,\n    \"name\": \"Teste\",\n    \"createdAt\": \"2022-07-03T21:59:55.538Z\",\n    \"updatedAt\": \"2022-07-03T21:59:55.538Z\",\n    \"id\": \"62c2115bf3801b12cbdcb6be\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Value or Qtd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Obetenção das cartas Bem Sucedida\",()=>{\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"priceInBrazilianReal\": 15.21,\r\n \"quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cards/{{cardId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cards",
+						"{{cardId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Value or Qtd (Success - only qtd)",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "261"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"105-DhTIsqcDHAhFu1U6/WGLqZvbO8o\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:28:08 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"foil\": false,\n    \"edition\": \"2st\",\n    \"playerId\": \"62c24e406d7628ec8364da95\",\n    \"language\": \"jp\",\n    \"quantity\": 2,\n    \"priceInBrazilianReal\": 12.53,\n    \"name\": \"testes de furia\",\n    \"createdAt\": \"2022-07-04T20:25:16.408Z\",\n    \"updatedAt\": \"2022-07-04T20:25:16.408Z\",\n    \"id\": \"62c34caccf79552cacd9d3b6\"\n}"
+				},
+				{
+					"name": "Update Value or Qtd(Success  only Price)",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"priceInBrazilianReal\": 15.21\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "261"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"105-6Kc3ipiXBD1eUAtVHMbdTW5NnY0\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:28:43 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"foil\": false,\n    \"edition\": \"2st\",\n    \"playerId\": \"62c24e406d7628ec8364da95\",\n    \"language\": \"jp\",\n    \"quantity\": 2,\n    \"priceInBrazilianReal\": 15.21,\n    \"name\": \"testes de furia\",\n    \"createdAt\": \"2022-07-04T20:25:16.408Z\",\n    \"updatedAt\": \"2022-07-04T20:28:08.473Z\",\n    \"id\": \"62c34caccf79552cacd9d3b6\"\n}"
+				},
+				{
+					"name": "Update Value or Qtd (Card not found)",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"priceInBrazilianReal\": 15.21,\r\n \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2d-0/DngVMh3I8l5ufZNBMeG+T3hSI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:30:06 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Card not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Remove Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Obetenção das cartas Bem Sucedida\",()=>{\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cards/{{cardId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cards",
+						"{{cardId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Remove Card (Success)",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:29:30 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Remove Card (Card not Found)",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"{{playerEmail}}\",\r\n \"password\": \"{{playerPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2d-0/DngVMh3I8l5ufZNBMeG+T3hSI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Jul 2022 20:29:52 GMT"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Card not found\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://magic-tcg-collection.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "playerPassword",
+			"value": "123456",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "partialCardName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cardId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "playerEmail",
+			"value": "uricbonatti@gmail.com",
+			"type": "string"
+		}
+	]
+}

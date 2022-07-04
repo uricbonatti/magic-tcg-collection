@@ -1,0 +1,848 @@
+openapi: 3.0.0
+info:
+  title: '[Zappts] Magic TCG Collection'
+  version: 1.0.0
+servers:
+  - url: https://magic-tcg-collection.herokuapp.com/
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /signup:
+    post:
+      tags:
+        - default
+      summary: Sign Up
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: 'uricbonatti@gmail.com'
+                password: '123456'
+                confirm_password: '123456'
+      security:
+        - noauthAuth: []
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '104'
+            ETag:
+              schema:
+                type: string
+                example: W/"68-ho2ui/8UzspCzFQIJukPHsUdwWA"
+            Date:
+              schema:
+                type: string
+                example: Sun, 03 Jul 2022 19:49:12 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                email: uricbonatti@gmail.com
+                createdAt: '2022-07-03T19:49:12.125Z'
+                id: 62c1f2b8ae3f595a205aab71
+        '400':
+          description: Bad Request
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '58'
+            ETag:
+              schema:
+                type: string
+                example: W/"3a-zbIJVs1VMB74J76QSBAJaQC+qjs"
+            Date:
+              schema:
+                type: string
+                example: Sun, 03 Jul 2022 19:49:32 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Sign Up (Email Used)
+                  value:
+                    status: error
+                    message: Email address already used.
+                example-1:
+                  summary: Sign Up (Passwords not match)
+                  value:
+                    status: error
+                    message: "'confirm_password' must be [ref:password]"
+  /signin:
+    post:
+      tags:
+        - default
+      summary: Sign In
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: 'uricbonatti@gmail.com'
+                password: '123456'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '298'
+            ETag:
+              schema:
+                type: string
+                example: W/"12a-ieY++NJPKX8i1zPX6dsiH2Mpp9Y"
+            Date:
+              schema:
+                type: string
+                example: Sun, 03 Jul 2022 19:51:30 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                player:
+                  email: uricbonatti@gmail.com
+                  createdAt: '2022-07-03T19:49:12.125Z'
+                  id: 62c1f2b8ae3f595a205aab71
+                token: >-
+                  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTY4Nzc4OTAsImV4cCI6MTY1Njk2NDI5MCwic3ViIjoiNjJjMWYyYjhhZTNmNTk1YTIwNWFhYjcxIn0.J1hswy324a6N2CGzXQjqwD57HDBVilJttt7DR1wfvzw
+        '401':
+          description: Unauthorized
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '68'
+            ETag:
+              schema:
+                type: string
+                example: W/"44-j6nZlXXQf+BpN3fF6aZuy7nodJo"
+            Date:
+              schema:
+                type: string
+                example: Sun, 03 Jul 2022 19:51:51 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: error
+                message: Incorrect email/password combination.
+  /cards/:
+    get:
+      tags:
+        - default
+      summary: List Player Cards
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '2'
+            Etag:
+              schema:
+                type: string
+                example: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:23:31 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: List Player Cards (Empty)
+                  value: []
+                example-1:
+                  summary: List Player Cards (Success)
+                  value:
+                    - foil: true
+                      edition: 2st
+                      playerId: 62c24e406d7628ec8364da95
+                      language: en
+                      quantity: 1
+                      priceInBrazilianReal: 150.53
+                      name: furia da tempestade
+                      createdAt: '2022-07-04T20:25:47.337Z'
+                      updatedAt: '2022-07-04T20:25:47.337Z'
+                      id: 62c34ccbcf79552cacd9d3b7
+                    - foil: false
+                      edition: 2st
+                      playerId: 62c24e406d7628ec8364da95
+                      language: jp
+                      quantity: 3
+                      priceInBrazilianReal: 12.53
+                      name: testes de furia
+                      createdAt: '2022-07-04T20:25:16.408Z'
+                      updatedAt: '2022-07-04T20:25:16.408Z'
+                      id: 62c34caccf79552cacd9d3b6
+                    - foil: true
+                      edition: 1st
+                      playerId: 62c24e406d7628ec8364da95
+                      language: en
+                      quantity: 1
+                      priceInBrazilianReal: 1.025
+                      name: testes de furia
+                      createdAt: '2022-07-04T20:24:50.921Z'
+                      updatedAt: '2022-07-04T20:24:50.921Z'
+                      id: 62c34c92cf79552cacd9d3b5
+    post:
+      tags:
+        - default
+      summary: Add Card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Storm Rage
+                edition: 2st
+                language: en
+                foil: true
+                priceInBrazilianReal: 150.53
+                quantity: 1
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '246'
+            ETag:
+              schema:
+                type: string
+                example: W/"f6-v91nbhLGr7ibXSUs8X8dGsFF8SU"
+            Date:
+              schema:
+                type: string
+                example: Sun, 03 Jul 2022 21:59:55 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                foil: true
+                edition: 1st
+                playerId: 62c21068b5fb3a07a3cbb2bf
+                language: pt
+                quantity: 1
+                priceInBrazilianReal: 1
+                name: Teste
+                createdAt: '2022-07-03T21:59:55.538Z'
+                updatedAt: '2022-07-03T21:59:55.538Z'
+                id: 62c2115bf3801b12cbdcb6be
+        '400':
+          description: Bad Request
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '69'
+            ETag:
+              schema:
+                type: string
+                example: W/"45-Wq0C4XAfVzOkok6BZrXps8IwuYI"
+            Date:
+              schema:
+                type: string
+                example: Sun, 03 Jul 2022 21:59:20 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: error
+                message: "'language' must be one of [pt, jp, en]"
+  /cards/{cardId}:
+    get:
+      tags:
+        - default
+      summary: Show Card
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cardId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '261'
+            Etag:
+              schema:
+                type: string
+                example: W/"105-ya+F5mbjFRA7gq/WM/uqGdQ7q6E"
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:26:48 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                foil: false
+                edition: 2st
+                playerId: 62c24e406d7628ec8364da95
+                language: jp
+                quantity: 3
+                priceInBrazilianReal: 12.53
+                name: testes de furia
+                createdAt: '2022-07-04T20:25:16.408Z'
+                updatedAt: '2022-07-04T20:25:16.408Z'
+                id: 62c34caccf79552cacd9d3b6
+        '404':
+          description: Not Found
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '45'
+            Etag:
+              schema:
+                type: string
+                example: W/"2d-0/DngVMh3I8l5ufZNBMeG+T3hSI"
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:23:57 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: error
+                message: Card not found
+    patch:
+      tags:
+        - default
+      summary: Update Value or Qtd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                priceInBrazilianReal: 15.21
+                quantity: 1
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cardId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '261'
+            Etag:
+              schema:
+                type: string
+                example: W/"105-DhTIsqcDHAhFu1U6/WGLqZvbO8o"
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:28:08 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Update Value or Qtd (Success - only qtd)
+                  value:
+                    foil: false
+                    edition: 2st
+                    playerId: 62c24e406d7628ec8364da95
+                    language: jp
+                    quantity: 2
+                    priceInBrazilianReal: 12.53
+                    name: testes de furia
+                    createdAt: '2022-07-04T20:25:16.408Z'
+                    updatedAt: '2022-07-04T20:25:16.408Z'
+                    id: 62c34caccf79552cacd9d3b6
+                example-1:
+                  summary: Update Value or Qtd(Success  only Price)
+                  value:
+                    foil: false
+                    edition: 2st
+                    playerId: 62c24e406d7628ec8364da95
+                    language: jp
+                    quantity: 2
+                    priceInBrazilianReal: 15.21
+                    name: testes de furia
+                    createdAt: '2022-07-04T20:25:16.408Z'
+                    updatedAt: '2022-07-04T20:28:08.473Z'
+                    id: 62c34caccf79552cacd9d3b6
+        '404':
+          description: Not Found
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '45'
+            Etag:
+              schema:
+                type: string
+                example: W/"2d-0/DngVMh3I8l5ufZNBMeG+T3hSI"
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:30:06 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: error
+                message: Card not found
+    delete:
+      tags:
+        - default
+      summary: Remove Card
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cardId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: No Content
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Content-Length:
+              schema:
+                type: integer
+                example: '0'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:29:30 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+        '404':
+          description: Not Found
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '45'
+            Etag:
+              schema:
+                type: string
+                example: W/"2d-0/DngVMh3I8l5ufZNBMeG+T3hSI"
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:29:52 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: error
+                message: Card not found
+  /cards/search/{name}:
+    get:
+      tags:
+        - default
+      summary: Search Cards
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: name
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '2'
+            Etag:
+              schema:
+                type: string
+                example: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+            Date:
+              schema:
+                type: string
+                example: Mon, 04 Jul 2022 20:24:14 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Search Cards (Empty)
+                  value: []
+                example-1:
+                  summary: Search Cards (Success)
+                  value:
+                    - foil: true
+                      edition: 2st
+                      playerId: 62c24e406d7628ec8364da95
+                      language: en
+                      quantity: 1
+                      priceInBrazilianReal: 150.53
+                      name: furia da tempestade
+                      createdAt: '2022-07-04T20:25:47.337Z'
+                      updatedAt: '2022-07-04T20:25:47.337Z'
+                      id: 62c34ccbcf79552cacd9d3b7

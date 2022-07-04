@@ -772,13 +772,19 @@ paths:
               example:
                 status: error
                 message: Card not found
-  /cards/search/tempestade:
+  /cards/search/{name}:
     get:
       tags:
         - default
       summary: Search Cards
       security:
         - bearerAuth: []
+      parameters:
+        - name: name
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: OK

@@ -1,21 +1,20 @@
-/* eslint-disable indent */
 import {
   Entity,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
   ObjectIdColumn,
-  ObjectID,
   BeforeInsert,
   BeforeUpdate
 } from 'typeorm';
+import { ObjectId } from 'mongodb';
 import { Expose, Exclude } from 'class-transformer';
 
 @Entity('cards')
 class Card {
   @Exclude()
   @ObjectIdColumn()
-  id: ObjectID;
+  id: ObjectId;
 
   @Column()
   foil: boolean;

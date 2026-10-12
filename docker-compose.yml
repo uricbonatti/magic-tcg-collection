@@ -1,25 +1,20 @@
-version: "3.9"
 services:
-  api:     
-    image: uricbonatti/mtc:1.0.0
+  api:
+    build: .
     container_name: mtc-api
-    ports: 
+    ports:
       - "3333:3333"
-    networks:
-      - challenge
+    env_file: .env
     environment:
-      MONGO_URL: 'mongodb://mongodbMTC:27017'  
-      GOOGLE_PROJECT_ID: '${GOOGLE_PROJECT_ID}'
-      GOOGLE_TRANSLATE_API_KEY: '${GOOGLE_TRANSLATE_API_KEY}'     
+      MONGO_URL: mongodb://mongodb:27017
     depends_on:
-      - mongodbMTC
-  
-  mongodbMTC:
-    image: mongo
-    container_name: mongodbMTC
-    networks: 
-      - challenge
+      - mongodb
 
-networks:
-  challenge:
-    driver: bridge
+  mongodb:
+    image: mongo:7
+    container_name: mtc-mongodb
+    volumes:
+      - mtc-data:/data/db
+
+volumes:
+  mtc-data:

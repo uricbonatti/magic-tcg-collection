@@ -1,91 +1,72 @@
 # Magic TCG Collection
 
-## Detalhes do Projeto
+[![CI](https://github.com/uricbonatti/magic-tcg-collection/actions/workflows/ci.yml/badge.svg)](https://github.com/uricbonatti/magic-tcg-collection/actions/workflows/ci.yml)
+![Node](https://img.shields.io/badge/node-22%20%7C%2024-339933?logo=node.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248?logo=mongodb&logoColor=white)
 
-Projeto desenvolvido para solucionar o desafio proposto pela Zappts.
+API REST para jogadores de **Magic: The Gathering** gerenciarem sua coleção de cartas: cadastro e login com JWT, CRUD de cartas, busca por nome e listagem ordenada por preço. Cartas cadastradas em outro idioma têm o nome **traduzido para português** (Google Cloud Translation) e normalizado. Foi feita como solução de um desafio técnico da Zappts (2022).
 
-O desafio esta descrito abaixo:
-[Desafio.pdf](docs/Desafio.pdf)
+## Destaques técnicos
 
-E esta disponivel para acesso temporariamente no Heroku:
-[Magic TCG Collection - Heroku](https://magic-tcg-collection.herokuapp.com/)
+- **Módulos** (`auth`, `cards`) com controller → service → repository e injeção de dependência (`tsyringe`)
+- **Autenticação JWT** com senhas em **bcrypt**; cada jogador só acessa as próprias cartas
+- **MongoDB + TypeORM 0.3**, com **índice único** no e-mail
+- **Validação de entrada** com Joi (`celebrate`), inclusive do formato do id
+- **Testes:** 64 unitários e **14 e2e com Testcontainers**, que sobem um MongoDB real e cobrem cadastro, login, isolamento entre jogadores, CRUD, busca e validações
+- **Docker:** imagem multi-stage com Node 24 e usuário sem privilégios
 
-### **Testes**
+## Executando
 
-Os testes do projeto utilizam das seguinte bibliotecas:
+### Com Docker Compose
 
-- **Supertest**: Testes de Rotas e Requisições HTTP
-- **Jest**: Motor de teste
-
-Os testes apresentaram uma excelente cobertura de testes unitatios.
-Para se replicar os testes localmente é preciso ter o `NodeJS 16.15.1`.
-
-Instalar a dependencias:
-
-```shell
-npm install
+```bash
+cp .env.example .env   # defina APP_SECRET e as credenciais do Google
+docker compose up --build
 ```
 
-E executar os testes unitatios:
+A API sobe em `http://localhost:3333` com o MongoDB.
 
-```shell
-npm test:unit
+### Localmente
+
+Requer Node.js **22** ou **24** e um MongoDB.
+
+```bash
+cp .env.example .env
+docker run -d --name mtc-mongo -p 27017:27017 mongo:7
+npm ci
+npm run start:dev
 ```
 
-Para se obter o arquivo de cobertura após o teste abra no navegador o arquivo `coverage/lcov-report/index.html` partindo da raiz do projeto.
+> Em produção (`NODE_ENV=production`) a API não sobe sem `APP_SECRET`: sem ele, qualquer um poderia forjar tokens.
 
-### **Executando Localmente**
+## Rotas
 
-É preciso ter o `NodeJS 16.15.1` ou superior e ter o `MongoDB` na maquina.
-O ideal é o uso do MongoDB através do docker, sendo o comando para criar o container o seguinte:
+| Método | Rota | Auth | Descrição |
+|---|---|---|---|
+| POST | `/signup` | — | Cadastra jogador (`email`, `password`, `confirm_password`) |
+| POST | `/signin` | — | Devolve `{ player, token }` |
+| GET | `/healthcheck` | — | `ok` |
+| GET | `/cards` | JWT | Lista as cartas do jogador, da mais cara para a mais barata |
+| GET | `/cards/search/:name` | JWT | Busca por trecho do nome |
+| GET | `/cards/:id` | JWT | Mostra uma carta |
+| POST | `/cards` | JWT | Cadastra carta (`name`, `edition`, `language` pt/en/jp, `foil`, `priceInBrazilianReal`, `quantity`) |
+| PATCH | `/cards/:id` | JWT | Atualiza `quantity` e/ou `priceInBrazilianReal` |
+| DELETE | `/cards/:id` | JWT | Remove a carta |
 
-```shell
-docker run --name mongodbMTC -p 27017:27017 -d mongo
+Documentação OpenAPI em [`docs/openapi.yml`](docs/openapi.yml) e coleção do Postman em [`docs/postman.postman_collection`](docs/postman.postman_collection).
+
+## Testes
+
+```bash
+npm test               # unitários (com --coverage gera o relatório em coverage/)
+npm run test:e2e       # e2e: sobe um MongoDB real com Testcontainers (requer Docker)
+npm run lint
+npm run typecheck
 ```
 
-Outro ponto importante é ter uma conta na **Google Cloud** com a **Translate Api** habilitada.
+Nos e2e, só o Google Translate é substituído por um tradutor fixo, por ser um serviço externo pago. Banco, JWT, bcrypt e as rotas são reais.
 
-Para executar o projeto precisa-se criar um arquivo `.env` na raiz do projeto contendo as seguintes variaveis:
+## Licença
 
-```env
-PORT=3333
-NODE_ENV=development
-MONGO_URL='mongodb://localhost:27017'
-
-GOOGLE_PROJECT_ID=
-GOOGLE_TRANSLATE_API_KEY=
-```
-
-Com as variaveis de ambiente configuradas, instale as dependencias do projeto atraves do:
-
-```shell
-npm install
-```
-
-E após a instalação o projeto esta pronto para ser executado em modo de desenvolvimento através do comando:
-
-```shell
-npm start:dev
-```
-
-### **Executando através do Docker**
-
-Utilize do **docker-compose** para executar o projeto através do seguinte comando:
-
-```shell
-docker-compose up
-```
-
-A API estará disponivel na porta default 3333, podendo ser alterada dentro do arquivo `docker-compose.yaml`
-
-### **Documentação da API**
-
-A documentação esta disponibilizada online no:
-
-- [Swagger](https://app.swaggerhub.com/apis-docs/URICBONATTIENG/zappts-magic_tcg_collection/1.0.0)
-- [Postman](https://documenter.getpostman.com/view/13703444/UzJFxKDX)
-
-Ou atráves de codigo:
-
-- [OpenApi/Swagger](docs/openapi.yml)
-- [Postman](postman.postman_collection)
+[MIT](LICENSE)

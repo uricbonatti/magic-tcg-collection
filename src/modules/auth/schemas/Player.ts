@@ -1,11 +1,11 @@
-/* eslint-disable indent */
 import {
   Entity,
   Column,
   CreateDateColumn,
   ObjectIdColumn,
-  ObjectID
+  Index
 } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 import { Expose, Exclude } from 'class-transformer';
 
@@ -13,9 +13,10 @@ import { Expose, Exclude } from 'class-transformer';
 class Player {
   @Exclude()
   @ObjectIdColumn()
-  id: ObjectID;
+  id: ObjectId;
 
-  @Column({ unique: true })
+  @Index({ unique: true })
+  @Column()
   email: string;
 
   @Exclude()

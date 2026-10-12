@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { celebrate, Segments, Joi } from 'celebrate';
 
 const updateCardValidator = celebrate({
   [Segments.PARAMS]: {
-    id: Joi.string().required()
+    id: Joi.string().hex().length(24).required()
   },
   [Segments.BODY]: {
     quantity: Joi.number().min(0).integer(),

@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'reflect-metadata';
 import { Server } from 'http';
-import supertest, { SuperAgentTest } from 'supertest';
+import supertest from 'supertest';
 import { container } from 'tsyringe';
 
 import app from '@shared/app/app';
 
 let server: Server;
-let agent: SuperAgentTest;
+let agent: ReturnType<typeof supertest.agent>;
 
 let isSignin: boolean;
 

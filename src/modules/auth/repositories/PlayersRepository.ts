@@ -19,7 +19,7 @@ class PlayersRepository implements IPlayersRepository {
   }
 
   public async findByEmail(email: string): Promise<Player | undefined> {
-    return this.odmRepository.findOne({ email });
+    return (await this.odmRepository.findOneBy({ email })) ?? undefined;
   }
 }
 

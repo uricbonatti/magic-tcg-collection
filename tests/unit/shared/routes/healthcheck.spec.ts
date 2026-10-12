@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Server } from 'http';
 import 'reflect-metadata';
 
-import supertest, { SuperAgentTest } from 'supertest';
+import supertest from 'supertest';
 
 import app from '@shared/app/app';
 
 let server: Server;
-let agent: SuperAgentTest;
+let agent: ReturnType<typeof supertest.agent>;
 
 describe('Healthcheck Route', () => {
   beforeEach((done) => {

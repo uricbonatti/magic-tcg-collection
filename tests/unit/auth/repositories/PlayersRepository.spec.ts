@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'reflect-metadata';
 import { ObjectId } from 'mongodb';
 import getMongoRepository from '@shared/utils/getMongoRepository';
@@ -23,7 +22,7 @@ describe('PlayersRepository', () => {
   beforeEach(() => {
     forceError = false;
     mockedGetMongoRepo.mockReturnValue({
-      findOne: async ({ email }: { email: string }): Promise<any> => {
+      findOneBy: async ({ email }: { email: string }): Promise<any> => {
         if (forceError) {
           throw new Error('Error');
         }

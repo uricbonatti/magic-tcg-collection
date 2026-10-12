@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { celebrate, Segments, Joi } from 'celebrate';
 
 const createCardValidator = celebrate({

@@ -1,16 +1,17 @@
-FROM node:16.14.0-alpine
-
-WORKDIR /usr
-COPY package.json ./
-RUN apk --no-cache add yarn  --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
-RUN yarn install --production
-COPY tsconfig.json ./
-COPY tsconfig.build.json ./
+FROM node:24-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+COPY tsconfig.json tsconfig.build.json ./
 COPY src ./src
-RUN yarn add -D typescript tscpaths
-RUN yarn build
-ENV NODE_ENV production
+RUN npm run build && npm prune --omit=dev
 
+FROM node:24-alpine
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=build /app/package.json ./
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
+USER node
 EXPOSE 3333
-
-CMD ["yarn","start"]
+CMD ["node", "dist/shared/app/server.js"]

@@ -29,7 +29,7 @@ export default function ensureAuthenticated(
       id: sub
     };
     return next();
-  } catch (err) {
+  } catch {
     throw new AppError('Invalid JWT token.', 401);
   }
 }

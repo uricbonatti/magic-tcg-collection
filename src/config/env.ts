@@ -10,4 +10,9 @@ const env = {
   GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
   GOOGLE_TRANSLATE_API_KEY: process.env.GOOGLE_TRANSLATE_API_KEY
 };
+// Sem segredo JWT em produção qualquer um poderia forjar tokens: falha ao subir.
+if (env.NODE_ENV === 'production' && !process.env.APP_SECRET) {
+  throw new Error('APP_SECRET must be set in production');
+}
+
 export default env;

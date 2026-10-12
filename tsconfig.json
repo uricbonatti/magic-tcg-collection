@@ -1,24 +1,31 @@
 {
-  "compilerOptions": {  
-    "target": "ES2019",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node10",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "commonjs",
-    "rootDir": "./",
-    "moduleResolution": "node",
-    "baseUrl": "./src",
     "paths": {
-      "@config/*": ["config/*"],    
-      "@modules/*": ["modules/*"],
-      "@shared/*": ["shared/*"]
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ]
     },
-    "allowJs": true,
-    "resolveJsonModule": true,  
-    "outDir": "./dist",  
-    "esModuleInterop": true,    
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,   
+    "strict": true,
     "strictPropertyInitialization": false,
-    "skipLibCheck": true         
-  }
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*"
+  ]
 }

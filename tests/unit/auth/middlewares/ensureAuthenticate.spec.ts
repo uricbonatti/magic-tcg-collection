@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import auth from '@config/auth';
 import { sign } from 'jsonwebtoken';
 import ensureAuthenticated from '@modules/auth/middlewares/ensureAuthenticated';

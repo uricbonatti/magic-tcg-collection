@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createLogger, transports, format } from 'winston';
 
 import env from '@config/env';
@@ -17,7 +16,11 @@ const consoleTransport = new transports.Console({
 
 const setTransports: any[] = [];
 
-env.NODE_ENV !== 'test' && setTransports.push(consoleTransport);
+setTransports.push(
+  env.NODE_ENV === 'test'
+    ? new transports.Console({ silent: true })
+    : consoleTransport
+);
 
 const logger = createLogger({
   transports: setTransports

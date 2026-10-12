@@ -1,6 +1,7 @@
 import getMongoRepository from '@shared/utils/getMongoRepository';
 import MethodLogger from '@shared/utils/MethodLogger';
 import { MongoRepository } from 'typeorm';
+import { ObjectId } from 'mongodb';
 import ICreateCardDTO from '../interfaces/ICreateCardDTO';
 import Card from '../schemas/Card';
 import ICardsRepository from './../interfaces/ICardsRepository';
@@ -20,12 +21,15 @@ class CardsRepository implements ICardsRepository {
 
   @MethodLogger()
   public async findByPlayerId(playerId: string): Promise<Card[]> {
-    return this.odmRepository.find({ playerId });
+    return this.odmRepository.findBy({ playerId });
   }
 
   @MethodLogger()
   public async findById(id: string): Promise<Card | undefined> {
-    return this.odmRepository.findOne(id);
+    return (
+      (await this.odmRepository.findOneBy({ _id: new ObjectId(id) })) ??
+      undefined
+    );
   }
 
   @MethodLogger()
@@ -33,7 +37,8 @@ class CardsRepository implements ICardsRepository {
     return this.odmRepository.find({
       where: {
         playerId,
-        name: new RegExp(`${name}`)
+        // Escapa a entrada: busca por trecho do nome, sem permitir regex do usuário.
+        name: new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
       }
     });
   }
@@ -45,7 +50,7 @@ class CardsRepository implements ICardsRepository {
 
   @MethodLogger()
   public async del(id: string): Promise<void> {
-    await this.odmRepository.delete(id);
+    await this.odmRepository.deleteOne({ _id: new ObjectId(id) });
   }
 }
 
